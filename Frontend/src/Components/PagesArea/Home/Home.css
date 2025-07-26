@@ -1,0 +1,70 @@
+.HeroSection {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.HeroSection::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 0;
+}
+
+.HeroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    animation: fadeInHero 1.2s ease-out;
+}
+
+.HeroContent h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.HeroContent p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+
+.HeroCTA {
+    background: #ffffff;
+    color: #2196f3;
+    border: none;
+    padding: 14px 36px;
+    font-size: 1rem;
+    border-radius: 32px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.HeroCTA:hover {
+    background: #e3f2fd;
+}
+
+@keyframes fadeInHero {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

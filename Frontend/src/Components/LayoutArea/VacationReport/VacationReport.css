@@ -1,0 +1,30 @@
+.VacationReport {
+    max-width: 1200px;
+    height: 470px;
+    margin: 120px auto 0;
+    background: #ffffffc1;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    color: rgba(50, 29, 85, 0.792);
+}
+
+.chart-scroll-container {
+    overflow-x: auto;
+}
+
+.download-csv-btn {
+    background-color: #6366f1;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.download-csv-btn:hover {
+    background-color: #4f46e5;
+}

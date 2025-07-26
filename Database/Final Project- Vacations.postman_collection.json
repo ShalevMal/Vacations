@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "f1cab5c9-d1b7-45bc-80b1-d7c57c1c5e72",
+		"name": "Final Project- Vacations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43058038"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Shalev\",\r\n  \"lastName\": \"Malihi\",\r\n  \"email\": \"shalev@gmail.com\",\r\n  \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"7618\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Vacation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI4NjJiNjQ2NzU0ZWQyZWQ5MTJkZjIiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTc0ODUxOTYzOSwiZXhwIjoxNzQ4NTMwNDM5fQ.YNY2iBcNlxYNTE4mRc8BSQaEtBlJVbi9biZMmR31L64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"destination\": \"Rosh Ha'ayin\",\r\n  \"description\": \"Beach, hummus and startup vibes 🇮🇱\",\r\n  \"startDate\": \"2025-08-01\",\r\n  \"endDate\": \"2025-08-07\",\r\n  \"price\": 2200,\r\n  \"imageName\": \"tlv.jpg\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Vacations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations/search?minPrice=1000&maxPrice=3000&sort=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations",
+						"search"
+					],
+					"query": [
+						{
+							"key": "minPrice",
+							"value": "1000"
+						},
+						{
+							"key": "maxPrice",
+							"value": "3000"
+						},
+						{
+							"key": "sort",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By Likes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations/search-by-like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations",
+						"search-by-like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Like",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3Mzg0NzQzLCJleHAiOjE3NDczOTU1NDN9.ec9Dgqcm-OS_3m-ECPm36R91Qdwf5biPsNR0QlTumz4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "destination",
+							"value": "Rosh Ha'ayin",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Beach, hummus and startup",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2025-08-01",
+							"type": "text"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-08-07",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "2200",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/shale/OneDrive/תמונות/rosh-haayin.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/likes/is-liked/68262dc78fe1cef228a7595f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"likes",
+						"is-liked",
+						"68262dc78fe1cef228a7595f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Likes Per Vacation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDQ3MzMyNWU0MDVlZGNiZmE2NjgiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6InNoYWxldkBnbWFpbC5jb20iLCJpYXQiOjE3NDczNDU0MzcsImV4cCI6MTc0NzM1NjIzN30.rKNC6XBLSrik6T6r7_i2tpmchDaHW4HlGmeO2aMqfZI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "destination",
+							"value": "Rosh Ha'ayin",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Beach, hummus and startup",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2025-08-01",
+							"type": "text"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-08-07",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "2200",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/shale/OneDrive/תמונות/rosh-haayin.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/likes-per-vacation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"likes-per-vacation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Likes Per User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3Mzg0OTk2LCJleHAiOjE3NDczOTU3OTZ9.AWkr4gxrn6tfr7L5XAduOf47I9ncCCLxFe-pXeRMing",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/likes/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"likes",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI4NjJiNjQ2NzU0ZWQyZWQ5MTJkZjIiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTc0ODUxOTYzOSwiZXhwIjoxNzQ4NTMwNDM5fQ.YNY2iBcNlxYNTE4mRc8BSQaEtBlJVbi9biZMmR31L64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "destination",
+							"value": "Rosh Ha'ayin",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Beach, hummus and startup",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2025-08-01",
+							"type": "text"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-08-07",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1801",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/shale/OneDrive/תמונות/rosh-haayin.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations/68384af53cf8cbfb7aa28f6c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations",
+						"68384af53cf8cbfb7aa28f6c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDQ3MzMyNWU0MDVlZGNiZmE2NjgiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6InNoYWxldkBnbWFpbC5jb20iLCJpYXQiOjE3NDczNDI4MjgsImV4cCI6MTc0NzM1MzYyOH0.AFAyh7nLW-IpvMbPvkmaCRNHKKn_G6pr9vWoiCdTTwg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/vacations/6826554955b7ec9b4065d12d?Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3MzQyNzE4LCJleHAiOjE3NDczNTM1MTh9.66GDb77IAY48nMgbUBG8FfeWVJs8rjoi8dgBHce56ms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"vacations",
+						"6826554955b7ec9b4065d12d"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3MzQyNzE4LCJleHAiOjE3NDczNTM1MTh9.66GDb77IAY48nMgbUBG8FfeWVJs8rjoi8dgBHce56ms"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Like",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3MzgzNDE2LCJleHAiOjE3NDczOTQyMTZ9.DrErV1wXg23hAd7xiXkIQqi3nDnaDim23G5iQC5d53A",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"vacationId\": \"68262da28fe1cef228a75957\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/likes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Like",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2NDFhOGI4MjdhMTFlZDAzZDM0YmUiLCJyb2xlIjoiVXNlciIsImVtYWlsIjoic2hhbGV2QG1haWwuY29tIiwiaWF0IjoxNzQ3MzgzODg3LCJleHAiOjE3NDczOTQ2ODd9.CvTT6JN-1OrklKmbT2EuZ3_7v6gyfZtMtbRffE1QkKE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/likes/682657bd6a1439b55f7f390f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"likes",
+						"682657bd6a1439b55f7f390f"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

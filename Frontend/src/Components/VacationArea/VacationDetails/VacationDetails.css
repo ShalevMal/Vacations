@@ -1,0 +1,162 @@
+.VacationDetails {
+    display: flex;
+    max-width: 1100px;
+    height: calc(90vh - 80px);
+    margin: 100px auto 20px;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+/* Left: Image */
+.image-side {
+    flex: 1.1;
+    height: 100%;
+}
+
+.image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right: Info side (divided into 3 sections) */
+.info-side {
+    flex: 1.4;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #fdfdfd;
+}
+
+/* Top title */
+.info-side h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f034b;
+    padding: 28px 36px 16px;
+    margin: 0;
+    border-bottom: 2px solid #e5e5e5;
+    flex-shrink: 0;
+}
+
+/* Scrollable content */
+.scrollable-content {
+    padding: 0 36px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+/* Info rows */
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 15.5px;
+}
+
+.row.full {
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+    min-width: 120px;
+}
+
+.value {
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Bottom: Actions area - always visible */
+.actions {
+    padding: 20px 36px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.like {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff3e6c;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.heart {
+    font-size: 22px;
+}
+
+.booking-btn {
+    padding: 12px 26px;
+    background: linear-gradient(to right, #1f034b, #3b0d91);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.booking-btn:hover {
+    transform: scale(1.03);
+    background-color: #291d66;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .VacationDetails {
+        flex-direction: column;
+        height: auto;
+        margin: 100px 20px;
+    }
+
+    .image-side {
+        height: 250px;
+    }
+
+    .info-side h1 {
+        font-size: 28px;
+        padding: 20px;
+    }
+
+    .scrollable-content {
+        padding: 0 20px;
+    }
+
+    .actions {
+        padding: 20px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .booking-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,50 @@
+.vacation-filter-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    padding: 20px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 950px;
+    margin: 40px auto;
+}
+
+.vacation-filter-panel .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vacation-filter-panel .input-group label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .vacation-filter-panel {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .vacation-filter-panel .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .vacation-filter-panel .input-group label {
+        margin-bottom: 4px;
+    }
+
+    .vacation-filter-panel select,
+    .vacation-filter-panel input[type="text"] {
+        width: 100%;
+    }
+}

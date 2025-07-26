@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "removeComments": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "skipLibCheck": true
+    }
+}

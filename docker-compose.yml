@@ -1,0 +1,57 @@
+# docker compose up -d
+# docker compose up -d --build
+# docker compose down
+
+services:
+
+  database-service:
+    build: ./Database
+    container_name: vacations-database-container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # -------------------------------------------------------------------
+
+  backend-service:
+    depends_on:
+      database-service:
+        condition: service_healthy
+    image: shalevmal/vacations-backend-image:1.0
+    build: ./Backend
+    container_name: vacations-backend-container
+    ports:
+      - 4001:4000
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: docker    
+      PORT: 4000
+      JWT_SECRET: TheAmazingClassOf4578-111
+      HASH_SALT: shalev-secret-salt
+    volumes:
+      - ./Backend/src:/app/src
+
+
+  # -------------------------------------------------
+
+  frontend-service:
+    image: shalevmal/vacations-frontend-image:1.0
+    build: ./Frontend
+    container_name: vacations-frontend-container
+    ports:
+      - 80:4173
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://localhost:4001
+    
+
+# -------------------------------------------------
+
+volumes:
+  mongo-data:

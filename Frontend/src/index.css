@@ -1,0 +1,32 @@
+html,
+body,
+#root {
+    text-align: center;
+    margin: 0;
+
+}
+
+
+body {
+    background-image: var(--beach-hero-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.234);
+    z-index: -1;
+}
+
+.vacation-filter-panel,
+.vacation-filter-panel * {
+    font-family: 'Poppins', sans-serif;
+}
