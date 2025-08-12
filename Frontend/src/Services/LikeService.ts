@@ -28,14 +28,14 @@ class LikeService {
 
     // Get vacation IDs liked by the user
     public async getUserLikes(): Promise<string[]> {
-        const response = await axios.get<string[]>(appConfig.likesUrl + "/user", this.getAuthHeader());
+        const response = await axios.get<string[]>(appConfig.likesUrl + "user", this.getAuthHeader());
         return response.data;
     }
 
 
     // Get number of likes per vacation
     public async getLikesCountPerVacation(): Promise<{ vacationId: string, count: number }[]> {
-        const response = await axios.get(appConfig.likesUrl + "/per-vacation", this.getAuthHeader());
+        const response = await axios.get(appConfig.likesUrl + "per-vacation", this.getAuthHeader());
         return response.data;
     }
 

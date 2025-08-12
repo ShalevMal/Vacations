@@ -1,6 +1,39 @@
 name: Docker Image CI
 
 on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: backend
+            context: Backend
+            file: Backend/Dockerfile
+          - name: frontend
+            context: Frontend
+            file: Frontend/Dockerfile
+            build-args: |
+              VITE_API_URL=http://localhost:4001
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build ${{ matrix.name }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          build-args: ${{ matrix.build-args }}
+          push: false
+name: Docker Image CI
+
+on:
   push:
     branches: [ "main" ]
   pull_request:
