@@ -37,6 +37,14 @@ export function VacationList(): JSX.Element {
         document.title = "Vacations | Levana Vacations";
     }, []);
 
+    const [isScrolled, setIsScrolled] = useState(false);
+    useEffect(() => {
+        const onScroll = () => setIsScrolled(window.scrollY > 8);
+        window.addEventListener("scroll", onScroll);
+        onScroll();
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
     useEffect(() => {
         if (!authService.isLoggedIn()) {
             notify.info("Please log in to view vacations.");
@@ -157,36 +165,75 @@ export function VacationList(): JSX.Element {
         currentPage * vacationsPerPage
     );
 
-const columnsPerRow = 4;
-const lastRowCount = currentVacations.slice(6, 9).length;
-const remainingSpots = columnsPerRow - lastRowCount;
-const showInspiration = currentVacations.length >= 7;
+    const columnsPerRow = 4;
+    const lastRowCount = currentVacations.slice(6, 9).length;
+    const remainingSpots = columnsPerRow - lastRowCount;
+    const showInspiration = currentVacations.length >= 7;
 
 
-const getInspireStyle = () => {
-    if (remainingSpots > 0) {
-        return { gridColumn: `span ${remainingSpots}` };
-    }
-    return { display: "none" }; 
-};
+    const getInspireStyle = () => {
+        if (remainingSpots > 0) {
+            return { gridColumn: `span ${remainingSpots}` };
+        }
+        return { display: "none" };
+    };
 
     return (
         <div className="VacationList container mx-auto px-4 py-12">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-4 mb-8">
+            {/* Mobile toolbar (fixed under topbar) */}
+            <div className={`mobile-toolbar md:hidden ${isScrolled ? "scrolled" : ""}`} role="region" aria-label="Search & Filters">
+                <input
+                    className="search-inline"
+                    type="text"
+                    placeholder="Search destination..."
+                    value={searchText}
+                    onChange={(e) => { setSearchText(e.target.value); setCurrentPage(1); }}
+                />
+
+                {/* FILTER */}
+                <details className="icon-menu">
+                    <summary aria-label="Filters"></summary>
+                    <div className="sheet left">
+                        <label>Show</label>
+                        <select value={filter} onChange={(e) => { setFilter(e.target.value as any); setCurrentPage(1); }}>
+                            <option value="all">All</option>
+                            <option value="active">Active</option>
+                            <option value="future">Future</option>
+                            <option value="liked">Liked</option>
+                        </select>
+                    </div>
+                </details>
+
+                {/* SORT */}
+                <details className="icon-menu">
+                    <summary aria-label="Sort"></summary>
+                    <div className="sheet right">
+                        <label>Sort by</label>
+                        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
+                            <option value="date">Date</option>
+                            <option value="price">Price</option>
+                        </select>
+
+                        <label>Order</label>
+                        <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value as any)}>
+                            <option value="asc">{sortBy === "price" ? "Low → High" : "Earliest First"}</option>
+                            <option value="desc">{sortBy === "price" ? "High → Low" : "Latest First"}</option>
+                        </select>
+                    </div>
+                </details>
+            </div>
+
+
+            {/* Desktop panel (unchanged) */}
+            <div className="desktop-filters hidden md:flex flex-col lg:flex-row items-center justify-between gap-4 mb-8">
                 <VacationFilterPanel
                     currentFilter={filter}
-                    setFilter={(f) => {
-                        setFilter(f);
-                        setCurrentPage(1);
-                    }}
+                    setFilter={(f) => { setFilter(f); setCurrentPage(1); }}
                     sortBy={sortBy}
                     sortOrder={sortOrder}
                     onSortByChange={setSortBy}
                     onSortOrderChange={setSortOrder}
-                    onSearchTextChange={(text) => {
-                        setSearchText(text);
-                        setCurrentPage(1);
-                    }}
+                    onSearchTextChange={(text) => { setSearchText(text); setCurrentPage(1); }}
                     isAdmin={isAdmin}
                 />
             </div>
@@ -240,12 +287,12 @@ const getInspireStyle = () => {
                     />
                 ))}
 
-    {showInspiration && remainingSpots > 0 && (
-        <div className="inspire-card" style={getInspireStyle()}>
-            <img src={heroSmallImage} alt="Inspiration" />
-        </div>
-    )}
-</div>
+                {showInspiration && remainingSpots > 0 && (
+                    <div className="inspire-card" style={getInspireStyle()}>
+                        <img src={heroSmallImage} alt="Inspiration" />
+                    </div>
+                )}
+            </div>
 
             <div className="pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (

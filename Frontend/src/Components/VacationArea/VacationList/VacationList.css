@@ -156,15 +156,174 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 768px){
+  .mobile-toolbar{ display:none !important; }
+  .desktop-filters{ display:flex !important; }
+}
 
-    .hero-section,
-    .vacation-row {
-        grid-template-columns: 1fr;
-    }
+/* ----- Mobile (≤768px) ----- */
+@media (max-width: 768px){
+  :root{
+    --topbar-h: 64px;   /* עדכן ל-72/80 אם צריך */
+    --toolbar-h: 52px;  /* גובה הטולבר */
+    --side-pad: 12px;   /* מרווח צד */
+  }
 
-    .hero-image {
-        grid-column: span 1;
-        height: 200px;
-    }
+  /* דוחף את התוכן מטה – שלא יתנגש בטולבר הקבוע */
+  .VacationList{
+    padding: calc(var(--topbar-h) + var(--toolbar-h) + 12px) var(--side-pad) 0;
+  }
+
+  /* ===== טולבר פרוס לכל הרוחב, כהה ושקוף ===== */
+  .mobile-toolbar{
+    position: fixed;
+    top: calc(var(--topbar-h) + env(safe-area-inset-top));
+    left: 0; right: 0;
+    z-index: 1000;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px 44px; /* חיפוש ~70% + 2 כפתורים */
+    align-items: center;
+    gap: 8px;
+
+    height: var(--toolbar-h);
+    padding: 2px var(--side-pad);
+
+    background-color: rgba(255, 255, 255, 0.76);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+  /* חיפוש */
+  .mobile-toolbar .search-inline{
+    height: 30px; width: 80%;
+    font-size: 16px; padding: 8px 14px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.96);
+    color: #0f172a; outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 14px rgba(0,0,0,.10);
+  }
+  .mobile-toolbar .search-inline::placeholder{ color:#6b7280; }
+
+  /* כפתורים עגולים */
+  .mobile-toolbar .icon-menu{ position: relative; }
+  .mobile-toolbar .icon-menu > summary{
+    list-style:none; cursor:pointer;
+    width: 40px; height: 40px;
+    display:grid; place-items:center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-toolbar .icon-menu > summary::-webkit-details-marker{ display:none; }
+
+  /* אייקונים (פילטר/מיון) בעזרת ::before – בלי SVG חיצוניים */
+  .mobile-toolbar .icon-menu:first-of-type > summary::before,
+  .mobile-toolbar .icon-menu:last-of-type  > summary::before{
+    content:""; width:18px; height:18px;
+    background-repeat:no-repeat; background-position:center; background-size:contain;
+    display:block; opacity:.9;
+  }
+  .mobile-toolbar .icon-menu:first-of-type > summary::before{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23111' stroke-width='2' viewBox='0 0 24 24'><polygon points='22 3 2 3 10 12 10 19 14 21 14 12 22 3'/></svg>");
+  }
+  .mobile-toolbar .icon-menu:last-of-type > summary::before{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23111' stroke-width='2' viewBox='0 0 24 24'><path d='M3 6h11'/><path d='M3 12h7'/><path d='M3 18h3'/><path d='M14 17l3 3 3-3'/></svg>");
+  }
+
+.mobile-toolbar .sheet {
+  position: absolute;
+  top: calc(100% + 10px);
+  z-index: 1100;
+
+  width: auto;
+  min-width: 80px;
+  max-width: min(88vw, 320px);   /* צרה ואלגנטית במובייל */
+  max-height: 65vh;
+  overflow: auto;
+
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 18px 42px rgba(0,0,0,.18);
+}
+
+/* חיבור ויזואלי לכפתור – “משולש” קטן */
+.mobile-toolbar .sheet::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 12px; height: 12px;
+  background: #fff;
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(0,0,0,.08);
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+/* עיגון לפי הכפתור:
+   - לחלונית של FILTER (משמאל): תיצמד לשמאל הכפתור
+   - לחלונית של SORT   (מימין): תיצמד לימין הכפתור
+   התאמה לשמות מחלקות שהשתמשנו בהם קודם: left / right או left-sheet / right-sheet
+*/
+.mobile-toolbar .sheet.left,
+.mobile-toolbar .sheet.left-sheet {
+  left: 0;
+}
+.mobile-toolbar .sheet.left::before,
+.mobile-toolbar .sheet.left-sheet::before {
+  left: 18px;
+}
+
+.mobile-toolbar .sheet.right,
+.mobile-toolbar .sheet.right-sheet {
+  right: 0;
+}
+.mobile-toolbar .sheet.right::before,
+.mobile-toolbar .sheet.right-sheet::before {
+  right: 18px;
+}
+
+/* תוכן פנימי של החלונית */
+.mobile-toolbar .sheet label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.mobile-toolbar .sheet select {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: #fff;
+  color: #111;
+  outline: none;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.06);
+  margin-bottom: 10px;
+}
+
+  /* רק הדסקטופ-פאנל נעלם במובייל */
+  .desktop-filters{ display:none !important; }
+
+  /* פריסת קלפים במובייל (לשימור מה שיש) */
+  .hero-section, .vacation-row{ grid-template-columns: 1fr; gap:8px; padding:0; margin-bottom:24px; }
+  .hero-image{ grid-column:auto; height:80px; }
+  .hero-title-overlay{ top:8%; left:50%; transform:translateX(-50%); text-align:center; padding:0 10px; }
+  .hero-title-overlay h1{ font-size: clamp(1.25rem, 5vw, 1.8rem); }
+  .vacation-row img{ width:100%; height:100%; object-fit:cover; }
+  .inspire-card{ height:220px; }
+  .pagination{ gap:10px; padding:6px 0 12px; }
+  .pagination-button{ width:44px; height:44px; border-radius:12px; }
+  html, body, .VacationList{ overflow-x:hidden; }
 }
